@@ -166,6 +166,16 @@ portions of a vector. \^2 squares a value.
 Is `-1:2` the same as `(-1):2` or `-(1:2)`? INSERT AN R CHUNK HERE AND
 RUN EACH OF THESE COMMANDS. Then state what each of these does.
 
+```{r}
+-1:2
+(-1):2
+-(1:2)
+```
+
+The first creates a sequence from -1 to 2 by ones. The second does the
+same. The third creates a sequence from 1 to 2 then applies a negative
+to it.
+
 ### Data input, plotting, and tests
 
 You can read in a dataset from the internet following this protocol.
@@ -187,12 +197,30 @@ of data is stored in each variable?
 
 ENTER ANSWERS HERE. ADD ANY R CHUNKS YOU USED TO FIND THE ANSWER.
 
+```{r}
+dim(sleep)
+```
+
+Dim returns the number of rows and columns in a dataframe! So sleep has
+r dim(sleep)\[1\] rows.
+
+```{r}
+str(sleep)
+```
+
+The str function returns the size of the dataset and the class of each
+column.
+
 #### 5
 
 Change the column named *BodyWt* to *Body_weight*"\* in the sleep
 dataset.
 
 ADD ANY R CHUNKS YOU USED TO COMPLETE THE TASK.
+
+```{r}
+names(sleep)[names(sleep) %in% "BodyWt"] <- "Body_weight"
+```
 
 #### 6
 
@@ -230,6 +258,13 @@ NOTE YOU CAN ADD A PLOT TO THE DOCUMENT TOO! AMEND THE BELOW AS NEEDED.
 plot(cars)
 ```
 
+```{r}
+plot(TotalSleep ~ Primate, sleep)
+```
+
+This is showing a comparison between primates and the other species
+inside the variable data set in "sleep."
+
 #### 7
 
 The **sleep** dataset begs to have a linear model fit for it. Let's
@@ -239,6 +274,31 @@ model to obtain the p-value for the model (hint: summary()). What does
 this imply?
 
 ENTER ANSWERS HERE. ADD ANY R CHUNKS YOU USED TO FIND THE ANSWER.
+
+The data has a vertical path that was able to be generated well. There
+are also the outliers that were a part of it, though removed. The data
+overall though, seems okay.
+
+*First look for outliers (before fitting a model)*
+
+```{r}
+plot(TotalSleep ~ BrainWt, sleep)
+```
+
+*We have few measurements where BrainWt \>1000, so let's exclude those
+for the model*
+
+```{r}
+sleep_fit <- lm(TotalSleep ~ BrainWt, sleep[sleep$BrainWt<1000,])
+summary(sleep_fit)
+```
+
+*We see a significant (p \<.05*
+
+```{r}
+plot(TotalSleep ~ BrainWt, data = sleep[sleep$BrainWt <  1000, ])
+abline(sleep_fit)
+```
 
 ### EXTRA QUESTIONS
 
