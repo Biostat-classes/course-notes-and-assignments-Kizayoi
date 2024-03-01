@@ -94,7 +94,7 @@ binom.test(19,25,p=.5)
 ```
 
 The p-value is not equal to .5 so therefore we reject the null
-hypothesis. The 95% 5% CI is .562 - .888
+hypothesis. The 95% 5% CI is .562 - .888.
 
 ### 2
 
@@ -115,4 +115,4 @@ binom.test(33,100, alternative="greater", p=.25)
 I chose to use a sided test since the professor wants to know if the
 students helped the dog.I found a p-value of .04, so I reject the null
 hypothesis that the proportion of correct answers is .25, which would be
-if it was all by chance, 1/4.
+if it was all by chance, 1/4, or 25%.
